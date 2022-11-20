@@ -1,35 +1,9 @@
 ---
-import { getImage } from "@astrojs/image";
 export interface Props {
     title: string;
-    pokemonId: number;
 }
 
-const { title, pokemonId } = Astro.props;
-
-const [{ src: src1 }, { src: src2 }, { src: src3 }, { src: src4 }] =
-    await Promise.all([
-        getImage({
-            src: `/sprites/${pokemonId}_1.png`,
-            width: 600,
-            aspectRatio: 1,
-        }),
-        getImage({
-            src: `/sprites/${pokemonId}_2.png`,
-            width: 600,
-            aspectRatio: 1,
-        }),
-        getImage({
-            src: `/sprites/${pokemonId}_3.png`,
-            width: 600,
-            aspectRatio: 1,
-        }),
-        getImage({
-            src: `/sprites/${pokemonId}_7.png`,
-            width: 600,
-            aspectRatio: 1,
-        }),
-    ]);
+const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -38,10 +12,6 @@ const [{ src: src1 }, { src: src2 }, { src: src3 }, { src: src4 }] =
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="preload" as="image" href={src1} />
-        <link rel="preload" as="image" href={src2} />
-        <link rel="preload" as="image" href={src3} />
-        <link rel="preload" as="image" href={src4} />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
