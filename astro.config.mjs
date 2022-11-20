@@ -10,8 +10,17 @@ import vercel from "@astrojs/vercel/serverless";
 import compress from "astro-compress";
 
 // https://astro.build/config
+import image from "@astrojs/image";
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [react(), compress()],
-  output: "server",
-  adapter: vercel()
+    integrations: [
+        react(),
+        compress(),
+        image({
+            serviceEntryPoint: "@astrojs/image/sharp",
+        }),
+    ],
+    output: "server",
+    adapter: vercel(),
 });
