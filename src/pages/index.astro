@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ButtonPixelize from "../components/ButtonPixelize";
+import Quizz from "../components/Quizz";
 import { random } from "../utils/random";
 import { POKEMONS_IDS } from "../utils/pokemons";
 import { _assert } from "../utils/_assert";
@@ -9,30 +9,22 @@ const index = random(0, POKEMONS_IDS.length - 1);
 const pokemonId = POKEMONS_IDS[index];
 _assert(pokemonId);
 
-const sprites = await fetch(
-    `${import.meta.env.PUBLIC_BASE_PATH}/spritesJson/${pokemonId}.json`
-);
-const spritesJson: {
-    1: string;
-    2: string;
-    3: string;
-    4: string;
-    7: string;
-} = await sprites.json();
+const url = `${import.meta.env.PUBLIC_BASE_PATH}/spritesJson/${pokemonId}.json`;
+const sprites = await fetch(url);
+const spritesJson = await sprites.json();
 ---
 
 <Layout title="Pokéflou">
     <main>
         <h1>Quel est ce POKéMON ?</h1>
-        <div>
-            <ButtonPixelize sprites={spritesJson} client:visible />
-        </div>
+        <Quizz sprites={spritesJson} client:visible />
 
         <style>
             h1 {
                 color: rgb(71, 85, 10);
                 font-weight: 400;
             }
+
             main {
                 display: flex;
                 flex-direction: column;
