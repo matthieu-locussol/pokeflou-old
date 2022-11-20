@@ -8,13 +8,27 @@ import { _assert } from "../utils/_assert";
 const index = random(0, POKEMONS_IDS.length - 1);
 const pokemonId = POKEMONS_IDS[index];
 _assert(pokemonId);
+
+const sprites = await fetch(
+    `http://localhost:3000/getSprites?id=${pokemonId}`,
+    {
+        method: "get",
+    }
+);
+const spritesJson: {
+    1: string;
+    2: string;
+    3: string;
+    4: string;
+    7: string;
+} = await sprites.json();
 ---
 
 <Layout title="Pokéflou" pokemonId={pokemonId}>
     <main>
         <h1>Quel est ce POKéMON ?</h1>
         <div>
-            <ButtonPixelize pokemonId={pokemonId} client:visible />
+            <ButtonPixelize sprites={spritesJson} client:visible />
         </div>
 
         <style>

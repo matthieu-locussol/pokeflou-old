@@ -2,15 +2,21 @@ import { useState } from "react";
 import ImageCard from "./ImageCard";
 
 export interface ButtonPixelizeProps {
-    pokemonId: number;
+    sprites: {
+        1: string;
+        2: string;
+        3: string;
+        4: string;
+        7: string;
+    };
 }
 
-export default function ButtonPixelize({ pokemonId }: ButtonPixelizeProps) {
-    const [count, setCount] = useState(1);
+export default function ButtonPixelize({ sprites }: ButtonPixelizeProps) {
+    const [count, setCount] = useState<1 | 2 | 3 | 4 | 7>(1);
     const increment = () =>
-        setCount((prevCount) => {
+        setCount((prevCount): 1 | 2 | 3 | 4 | 7 => {
             if (prevCount < 4) {
-                return prevCount + 1;
+                return (prevCount + 1) as 1 | 2 | 3 | 4 | 7;
             }
 
             if (prevCount === 4) {
@@ -22,7 +28,7 @@ export default function ButtonPixelize({ pokemonId }: ButtonPixelizeProps) {
 
     return (
         <>
-            <ImageCard imageUrl={`/sprites/${pokemonId}_${count}.png`} />
+            <ImageCard imageUrl={`data:image/png;base64,${sprites[count]}`} />
             <input type="text" />
             <div className="buttons">
                 <button type="button" className="primary">
