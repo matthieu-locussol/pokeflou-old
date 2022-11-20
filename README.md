@@ -1,2 +1,2 @@
-# pokeflou
-Wtf is this
+# Pokéflou ✨
+Wtf is this?
