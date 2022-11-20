@@ -10,7 +10,7 @@ const pokemonId = POKEMONS_IDS[index];
 _assert(pokemonId);
 
 const sprites = await fetch(
-    `http://localhost:3000/getSprites?id=${pokemonId}`,
+    `${import.meta.env.PUBLIC_BASE_PATH}/getSprites?id=${pokemonId}`,
     {
         method: "get",
     }
